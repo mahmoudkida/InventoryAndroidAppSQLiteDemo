@@ -31,8 +31,7 @@ public final class InventoryContract {
 
         //category types
         public static final int CATEGORY_LAPTOP = 0;
-        public static final int CATEGORY_PHONE = 1;
-        public static final int CATEGORY_TABLET = 2;
+
 
     }
     public static final class SupplierEntry implements BaseColumns {
