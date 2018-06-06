@@ -5,9 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import  com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.ProductEntry;
 import  com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
@@ -16,6 +18,7 @@ import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryDBHel
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private InventoryDBHelper inventoryDbHelper;
 
     @Override
@@ -203,7 +206,15 @@ public class MainActivity extends AppCompatActivity {
         values.put(ProductEntry.COLUMN_PRODUCT_CATEGORY, ProductEntry.CATEGORY_LAPTOP);
         values.put(ProductEntry.COLUMN_PRODUCT_SUPPLIER_ID, 1);
         // Insert a new row for Toto in the database, returning the ID of that new row.
-        long newRowId = db.insert(ProductEntry.TABLE_NAME, null, values);
+        long rowsInserted = db.insert(ProductEntry.TABLE_NAME, null, values);
+        if(rowsInserted == -1){
+            Log.d(LOG_TAG, "Problem inserting data...");
+            Toast.makeText(getApplicationContext(), "A problem happened while inserting data, please make sure you have a space on your mobile", Toast.LENGTH_LONG).show();
+        }else{
+            Log.d(LOG_TAG, rowsInserted + " rows inserted successfully...");
+            Toast.makeText(getApplicationContext(), "Data inserted successfully", Toast.LENGTH_SHORT).show();
+        }
+
         displayProductsInfo();
     }
 
@@ -221,7 +232,14 @@ public class MainActivity extends AppCompatActivity {
         values.put(SupplierEntry.COLUMN_SUPPLIER_PHONE, 596113439);
 
         // Insert a new row for Toto in the database, returning the ID of that new row.
-        long newRowId = db.insert(SupplierEntry.TABLE_NAME, null, values);
+        long rowsInserted = db.insert(SupplierEntry.TABLE_NAME, null, values);
+        if(rowsInserted == -1){
+            Log.d(LOG_TAG, "Problem inserting data...");
+            Toast.makeText(getApplicationContext(), "A problem happened while inserting data, please make sure you have a space on your mobile", Toast.LENGTH_LONG).show();
+        }else{
+            Log.d(LOG_TAG, rowsInserted + " rows inserted successfully...");
+            Toast.makeText(getApplicationContext(), "Data inserted successfully", Toast.LENGTH_SHORT).show();
+        }
         displaySuppliersInfo();
     }
 }
