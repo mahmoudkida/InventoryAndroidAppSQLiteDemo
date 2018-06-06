@@ -222,6 +222,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Insert a new row for Toto in the database, returning the ID of that new row.
         long newRowId = db.insert(SupplierEntry.TABLE_NAME, null, values);
-        displayProductsInfo();
+        displaySuppliersInfo();
     }
 }
