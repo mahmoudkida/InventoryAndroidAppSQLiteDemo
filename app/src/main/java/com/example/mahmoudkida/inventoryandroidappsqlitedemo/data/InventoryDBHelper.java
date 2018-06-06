@@ -12,7 +12,7 @@ import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContr
  * Created by Mahmoud Kida on 6/5/2018.
  */
 public class InventoryDBHelper extends SQLiteOpenHelper {
-    public static final String LOG_TAG = InventoryDBHelper.class.getSimpleName();
+    private static final String LOG_TAG = InventoryDBHelper.class.getSimpleName();
     /**
      * Name of the database file
      */

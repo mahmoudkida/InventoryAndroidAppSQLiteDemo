@@ -18,8 +18,9 @@ import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryDBHel
 
 public class MainActivity extends AppCompatActivity {
 
-    private InventoryDBHelper inventoryDbHelper;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private InventoryDBHelper inventoryDbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,10 +209,10 @@ public class MainActivity extends AppCompatActivity {
         long rowsInserted = db.insert(ProductEntry.TABLE_NAME, null, values);
         if(rowsInserted == -1){
             Log.d(LOG_TAG, "Problem inserting data...");
-            Toast.makeText(getApplicationContext(), "A problem happened while inserting data, please make sure you have a space on your mobile", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "A problem happened while inserting data, please make sure you have a space on your mobile", Toast.LENGTH_LONG).show();
         }else{
             Log.d(LOG_TAG, rowsInserted + " rows inserted successfully...");
-            Toast.makeText(getApplicationContext(), "Data inserted successfully", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Data inserted successfully", Toast.LENGTH_SHORT).show();
         }
 
         displayProductsInfo();
@@ -231,7 +232,14 @@ public class MainActivity extends AppCompatActivity {
         values.put(SupplierEntry.COLUMN_SUPPLIER_PHONE, 596113439);
 
         // Insert a new row for Toto in the database, returning the ID of that new row.
-        long newRowId = db.insert(SupplierEntry.TABLE_NAME, null, values);
+        long rowsInserted = db.insert(SupplierEntry.TABLE_NAME, null, values);
+        if(rowsInserted == -1){
+            Log.d(LOG_TAG, "Problem inserting data...");
+            Toast.makeText(getApplicationContext(), "A problem happened while inserting data, please make sure you have a space on your mobile", Toast.LENGTH_LONG).show();
+        }else{
+            Log.d(LOG_TAG, rowsInserted + " rows inserted successfully...");
+            Toast.makeText(getApplicationContext(), "Data inserted successfully", Toast.LENGTH_SHORT).show();
+        }
         displaySuppliersInfo();
     }
 }
