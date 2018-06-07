@@ -26,17 +26,17 @@ public class SupplierAdapter extends ArrayAdapter<Supplier> {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.supplier, parent, false);
+                    R.layout.supplier_item, parent, false);
         }
         Supplier supplier = getItem(position);
         //get views
-        TextView supplierId = listItemView.findViewById(R.id.supplierId);
-        TextView supplierName = listItemView.findViewById(R.id.supplierName);
-        TextView supplierPhone = listItemView.findViewById(R.id.supplierPhone);
+        TextView supplierIdView = listItemView.findViewById(R.id.supplierId);
+        TextView supplierNameView = listItemView.findViewById(R.id.supplierName);
+        TextView supplierPhoneView = listItemView.findViewById(R.id.supplierPhone);
         //set views data
-        supplierId.setText("ID: " + supplier.getID());
-        supplierName.setText(supplier.getName());
-        supplierPhone.setText(supplier.getPhone());
+        supplierIdView.setText("ID: " + supplier.getID());
+        supplierNameView.setText(supplier.getName());
+        supplierPhoneView.setText(supplier.getPhone());
 
         return listItemView;
     }

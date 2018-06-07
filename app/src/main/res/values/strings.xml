@@ -2,4 +2,5 @@
     <string name="app_name">Inventory Android App SQLite Demo</string>
     <string name="add_product_label">Add New Product</string>
     <string name="add_supplier_label">Add New Supplier</string>
+    <string name="productImageDescription">Product Image</string>
 </resources>
