@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         NavigationView navigationView   = findViewById(R.id.nav_view);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment productPragment = (Fragment) ProductListFragment.newInstance();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, productPragment).commit();
+        navigationView.setCheckedItem(R.id.products_nav);
+
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -72,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
-                        //menuItem.setChecked(true);
+                        menuItem.setChecked(true);
                         drawer.closeDrawer(GravityCompat.START);
                         return true;
                     }
