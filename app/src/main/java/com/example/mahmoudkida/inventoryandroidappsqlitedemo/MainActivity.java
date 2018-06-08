@@ -1,11 +1,15 @@
 package com.example.mahmoudkida.inventoryandroidappsqlitedemo;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.NavigationView;
+
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,13 +60,18 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
                         if(menuItem.getItemId() == R.id.products_nav){
-                            Intent productActivity = new Intent(getApplicationContext(), ProductsListActivity.class);
-                            startActivity(productActivity);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            Fragment productPragment = (Fragment) ProductListFragment.newInstance();
+                            fragmentManager.beginTransaction().replace(R.id.content_frame, productPragment).commit();
                         }
                         else if(menuItem.getItemId() == R.id.suppliers_nav){
-                            Intent supplierActivity = new Intent(getApplicationContext(), SuppliersListActivity.class);
-                            startActivity(supplierActivity);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            Fragment suppliersListFragment = (Fragment) SuppliersListFragment.newInstance();
+                            fragmentManager.beginTransaction().replace(R.id.content_frame, suppliersListFragment).commit();
+
                         }
+
+
                         //menuItem.setChecked(true);
                         drawer.closeDrawer(GravityCompat.START);
                         return true;

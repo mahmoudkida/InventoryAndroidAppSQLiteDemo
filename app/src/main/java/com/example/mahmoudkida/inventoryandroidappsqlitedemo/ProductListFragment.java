@@ -1,11 +1,15 @@
 package com.example.mahmoudkida.inventoryandroidappsqlitedemo;
 
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.ProductEntry;
@@ -14,23 +18,30 @@ import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryDBHel
 
 import java.util.ArrayList;
 
-public class ProductsListActivity extends AppCompatActivity {
 
-    private InventoryDBHelper inventoryDbHelper = new InventoryDBHelper(this);
+public class ProductListFragment extends Fragment {
+
+    public static ProductListFragment newInstance() {
+        return new ProductListFragment();
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_list);
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_product_list, container, false);
 
         final ArrayList<Product> products = fetchAllProducts();
-        ProductAdapter productAdapter = new ProductAdapter(this, products);
-        ListView productsList = findViewById(R.id.productsList);
+        ProductAdapter productAdapter = new ProductAdapter(getActivity(), products);
+        ListView productsList = view.findViewById(R.id.productsList);
         productsList.setAdapter(productAdapter);
         productsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Product currentProduct = products.get(i);
-               Intent redirect = new Intent(getApplicationContext(), ProductDetailsActivity.class);
+                Intent redirect = new Intent(getActivity(), ProductDetailsActivity.class);
                 redirect.putExtra("productName", currentProduct.getName());
                 redirect.putExtra("productPrice", currentProduct.getPrice());
                 redirect.putExtra("productQuantity", currentProduct.getQuantity());
@@ -39,10 +50,14 @@ public class ProductsListActivity extends AppCompatActivity {
                 startActivity(redirect);
             }
         });
+
+
+        return view;
     }
 
-
     private ArrayList<Product> fetchAllProducts() {
+        InventoryDBHelper inventoryDbHelper = new InventoryDBHelper(getActivity());
+
 
         ArrayList<Product> productsList = new ArrayList<Product>();
         // Create and/or open a database to read from it
@@ -108,7 +123,7 @@ public class ProductsListActivity extends AppCompatActivity {
                 try {
                     int supplierNameColumnIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_NAME);
                     while (supplierCursor.moveToNext()) {
-                       currentProduct.setSupplierName(supplierCursor.getString(0));
+                        currentProduct.setSupplierName(supplierCursor.getString(0));
                     }
                 }
                 catch (Exception e){

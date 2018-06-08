@@ -1,31 +1,44 @@
 package com.example.mahmoudkida.inventoryandroidappsqlitedemo;
 
+import android.app.Fragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Adapter;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryDBHelper;
 
 import java.util.ArrayList;
 
-public class SuppliersListActivity extends AppCompatActivity {
-    //initialize database herlper class
-    private InventoryDBHelper inventoryDbHelper = new InventoryDBHelper(this);
+
+public class SuppliersListFragment extends Fragment {
+
+    public static SuppliersListFragment newInstance() {
+        return new SuppliersListFragment();
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suppliers_list);
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_suppliers_list, container, false);
 
         final ArrayList<Supplier> suppliers = fetchAllSuppliers();
-        SupplierAdapter supplierAdapter = new SupplierAdapter(this, suppliers);
-        ListView suppliersList = findViewById(R.id.suppliersList);
+        SupplierAdapter supplierAdapter = new SupplierAdapter(getActivity(), suppliers);
+        ListView suppliersList = view.findViewById(R.id.suppliersList);
         suppliersList.setAdapter(supplierAdapter);
+
+        return view;
     }
 
     private ArrayList<Supplier> fetchAllSuppliers (){
+        InventoryDBHelper inventoryDbHelper = new InventoryDBHelper(getActivity());
 
         ArrayList<Supplier> suppliersList = new ArrayList<Supplier>();
         // Create and/or open a database to read from it
