@@ -14,8 +14,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
                         if(menuItem.getItemId() == R.id.products_nav){
-                            Intent productActivity = new Intent(getApplicationContext(), ProductsList.class);
+                            Intent productActivity = new Intent(getApplicationContext(), ProductsListActivity.class);
                             startActivity(productActivity);
                         }
                         else if(menuItem.getItemId() == R.id.suppliers_nav){
-                            Intent supplierActivity = new Intent(getApplicationContext(), SuppliersList.class);
+                            Intent supplierActivity = new Intent(getApplicationContext(), SuppliersListActivity.class);
                             startActivity(supplierActivity);
                         }
                         //menuItem.setChecked(true);

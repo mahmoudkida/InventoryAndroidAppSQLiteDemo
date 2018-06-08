@@ -4,4 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SuppliersList"></android.support.constraint.ConstraintLayout>
+    tools:context=".SuppliersListActivity">
+
+    <ListView android:id="@+id/suppliersList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</android.support.constraint.ConstraintLayout>

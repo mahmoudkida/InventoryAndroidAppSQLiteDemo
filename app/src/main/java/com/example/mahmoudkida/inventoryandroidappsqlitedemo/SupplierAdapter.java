@@ -34,9 +34,9 @@ public class SupplierAdapter extends ArrayAdapter<Supplier> {
         TextView supplierNameView = listItemView.findViewById(R.id.supplierName);
         TextView supplierPhoneView = listItemView.findViewById(R.id.supplierPhone);
         //set views data
-        supplierIdView.setText("ID: " + supplier.getID());
+        supplierIdView.setText("ID: " + Integer.toString(supplier.getID()));
         supplierNameView.setText(supplier.getName());
-        supplierPhoneView.setText(supplier.getPhone());
+        supplierPhoneView.setText(Integer.toString(supplier.getPhone()));
 
         return listItemView;
     }

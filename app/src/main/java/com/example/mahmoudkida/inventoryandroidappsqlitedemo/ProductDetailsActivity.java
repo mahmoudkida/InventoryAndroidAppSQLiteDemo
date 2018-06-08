@@ -3,10 +3,10 @@ package com.example.mahmoudkida.inventoryandroidappsqlitedemo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ProductsList extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_list);
+        setContentView(R.layout.activity_product_details);
     }
 }

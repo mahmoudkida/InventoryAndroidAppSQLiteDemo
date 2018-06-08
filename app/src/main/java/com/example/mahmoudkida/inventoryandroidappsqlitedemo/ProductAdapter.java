@@ -28,8 +28,8 @@ public class ProductAdapter extends ArrayAdapter<Product>{
         TextView productQuantityView = listItemView.findViewById(R.id.productQuantity);
         //set views data
         productNameView.setText(product.getName());
-        productPriceView.setText(product.getPrice());
-        productQuantityView.setText(product.getQuantity());
+        productPriceView.setText(Integer.toString(product.getPrice()));
+        productQuantityView.setText(Integer.toString(product.getQuantity()));
 
         return listItemView;
     }

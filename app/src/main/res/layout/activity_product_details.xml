@@ -4,9 +4,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductsListActivity">
-
-    <ListView android:id="@+id/productsList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</android.support.constraint.ConstraintLayout>
+    tools:context=".ProductDetailsActivity"></android.support.constraint.ConstraintLayout>
