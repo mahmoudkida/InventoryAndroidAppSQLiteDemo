@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProductEditActivity" android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/product_name_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Name" />
+        android:text="@string/product_name_label"
+        android:labelFor="@+id/productName"/>
 
     <EditText
         android:id="@+id/productName"
@@ -18,15 +18,18 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="" />
+        android:text=""
+        android:hint="@string/product_name_label"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:labelFor="@+id/productPrice"
+        android:id="@+id/product_price_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Price" />
+        android:text="@string/product_price_label" />
 
     <EditText
+        android:hint="@string/product_price_label"
         android:id="@+id/productPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,34 +37,36 @@
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:labelFor="@+id/productQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Quantity" />
+        android:text="@string/product_quantity_label" />
 
     <EditText
         android:id="@+id/productQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="number"
+        android:hint="@string/product_quantity_label"/>
 
     <TextView
-        android:id="@+id/textView5"
+        android:labelFor="@+id/productCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Caregory" />
+        android:text="@string/product_category_label" />
 
     <Spinner
         android:id="@+id/productCategory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <TextView
-        android:id="@+id/textView6"
+        android:labelFor="@+id/productSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Supplier" />
+        android:text="@string/product_supplier_label" />
 
     <Spinner
         android:id="@+id/productSupplier"

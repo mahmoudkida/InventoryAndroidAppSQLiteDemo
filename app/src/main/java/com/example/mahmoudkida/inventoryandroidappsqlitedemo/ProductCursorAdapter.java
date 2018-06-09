@@ -32,7 +32,6 @@ public class ProductCursorAdapter extends CursorAdapter {
         TextView productQuantityView = view.findViewById(R.id.productQuantity);
         TextView productCategoryView = view.findViewById(R.id.productCategory);
         // Figure out the index of each column
-        int idColumnIndex = cursor.getColumnIndex(ProductEntry._ID);
         int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME);
         int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_QUANTITY);

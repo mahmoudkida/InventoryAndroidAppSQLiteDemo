@@ -6,14 +6,9 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
-
-
-import java.util.ArrayList;
 
 /**
  * Created by Mahmoud Kida on 6/6/2018.

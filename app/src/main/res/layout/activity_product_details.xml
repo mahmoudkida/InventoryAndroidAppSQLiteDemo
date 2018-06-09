@@ -21,13 +21,13 @@
         android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
     <TextView
         android:id="@+id/productCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintTop_toBottomOf="@+id/productName" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:text="TextView" />
+        android:text="" />
 
     <View
         android:id="@+id/divider"
@@ -50,19 +50,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        android:text="TextView" />
+        android:text="" />
     <TextView
         android:id="@+id/productSupplierName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/productQuantity"
-        android:text="TextView" />
+        android:text="" />
     <TextView
         android:id="@+id/productSupplierPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/productSupplierName"
-        android:text="TextView" />
+        android:text="" />
 
     <Button
         android:id="@+id/sellProduct"

@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -56,14 +58,24 @@ public class ProductEditActivity extends AppCompatActivity implements
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mPetHasChanged boolean to true.
      */
-    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+    private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            mProductHasChanged = true;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    mProductHasChanged = true;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    view.performClick();
+                    break;
+                default:
+                    break;
+            }
             return false;
         }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +102,7 @@ public class ProductEditActivity extends AppCompatActivity implements
         viewProductQuantity = findViewById(R.id.productQuantity);
         viewProductCategory = findViewById(R.id.productCategory);
         viewProductSupplier = findViewById(R.id.productSupplier);
-        //set touch lisnter
+        //set touch listner
         viewProductName.setOnTouchListener(mTouchListener);
         viewProductPrice.setOnTouchListener(mTouchListener);
         viewProductQuantity.setOnTouchListener(mTouchListener);
@@ -100,14 +112,13 @@ public class ProductEditActivity extends AppCompatActivity implements
         setupSupplierSpinner();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setupSupplierSpinner() {
         String[] supplierProjection = {
                 SupplierEntry._ID,
                 SupplierEntry.COLUMN_SUPPLIER_NAME,
                 SupplierEntry.COLUMN_SUPPLIER_PHONE};
-        List<String> supplierNames = new ArrayList<String>();
-        List<Integer> supplierIDs = new ArrayList<Integer>();
-        final HashMap<Integer, String> spinnerMap = new HashMap<Integer, String>();
+
         // This loader will execute the ContentProvider's query method on a background thread
         Cursor supplierCursor = getContentResolver().query(
                 SupplierEntry.CONTENT_URI         // Query the content URI for the current pet
@@ -184,7 +195,7 @@ public class ProductEditActivity extends AppCompatActivity implements
 
     /**
      * This method is called after invalidateOptionsMenu(), so that the
-     * menu can be u pdated (some menu items can be hidden or made visible).
+     * menu can be u dated (some menu items can be hidden or made visible).
      */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -248,7 +259,7 @@ public class ProductEditActivity extends AppCompatActivity implements
         String productName = viewProductName.getText().toString().trim();
         String productPrice = viewProductPrice.getText().toString().trim();
         String productQuantity = viewProductQuantity.getText().toString().trim();
-        //get integer values of price and qauntity
+        //get integer values of price and quantity
         int productPriceInt = Integer.parseInt(productPrice);
         int productQuantityInt = Integer.parseInt(productQuantity);
         // Check if this is supposed to be a new pet
@@ -365,11 +376,11 @@ public class ProductEditActivity extends AppCompatActivity implements
             int supplierId = cursor.getInt(supplierColumnIndex);
             String name = cursor.getString(nameColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
-            int qauntity = cursor.getInt(quantityColumnIndex);
+            int quantity = cursor.getInt(quantityColumnIndex);
             int category = cursor.getInt(categoryColumnIndex);
             viewProductName.setText(name);
             viewProductPrice.setText(Integer.toString(price));
-            viewProductQuantity.setText(Integer.toString(qauntity));
+            viewProductQuantity.setText(Integer.toString(quantity));
             viewProductCategory.setSelection(category);
             for (int i = 0; i < viewProductSupplier.getCount(); i++) {
                 Cursor value = (Cursor) viewProductSupplier.getItemAtPosition(i);
@@ -378,7 +389,6 @@ public class ProductEditActivity extends AppCompatActivity implements
                     viewProductSupplier.setSelection(i);
                 }
             }
-            //viewProductSupplier.setSelection(supplierId);
         }
     }
 
@@ -402,7 +412,7 @@ public class ProductEditActivity extends AppCompatActivity implements
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
         // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
+        // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.unsaved_changes_dialog_msg);
         builder.setPositiveButton(R.string.discard, discardButtonClickListener);
@@ -425,7 +435,7 @@ public class ProductEditActivity extends AppCompatActivity implements
      */
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
+        // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {

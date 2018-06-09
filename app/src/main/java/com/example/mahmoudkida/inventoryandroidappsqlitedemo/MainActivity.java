@@ -2,12 +2,7 @@ package com.example.mahmoudkida.inventoryandroidappsqlitedemo;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.NavigationView;
 
 import android.support.v4.view.GravityCompat;
@@ -16,12 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import  com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.ProductEntry;
 import  com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
@@ -30,7 +20,6 @@ import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryDBHel
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private InventoryDBHelper inventoryDbHelper;
 
 
@@ -56,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView   = findViewById(R.id.nav_view);
 
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment productPragment = (Fragment) ProductListFragment.newInstance();
+        Fragment productPragment =  ProductListFragment.newInstance();
         fragmentManager.beginTransaction().replace(R.id.content_frame, productPragment).commit();
         navigationView.setCheckedItem(R.id.products_nav);
         setTitle(getString(R.string.product_list));
@@ -71,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
                         if(menuItem.getItemId() == R.id.products_nav){
                             setTitle(getString(R.string.product_list));
                             FragmentManager fragmentManager = getFragmentManager();
-                            Fragment productPragment = (Fragment) ProductListFragment.newInstance();
+                            Fragment productPragment = ProductListFragment.newInstance();
                             fragmentManager.beginTransaction().replace(R.id.content_frame, productPragment).commit();
                         }
                         else if(menuItem.getItemId() == R.id.suppliers_nav){
                             setTitle(getString(R.string.supplier_list));
                             FragmentManager fragmentManager = getFragmentManager();
-                            Fragment suppliersListFragment = (Fragment) SuppliersListFragment.newInstance();
+                            Fragment suppliersListFragment =  SuppliersListFragment.newInstance();
                             fragmentManager.beginTransaction().replace(R.id.content_frame, suppliersListFragment).commit();
 
                         }
@@ -89,12 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

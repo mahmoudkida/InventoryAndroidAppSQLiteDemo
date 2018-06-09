@@ -42,10 +42,19 @@ public class SupplierEditActivity extends AppCompatActivity implements
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mPetHasChanged boolean to true.
      */
-    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+    private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            mSupplierHasChanged = true;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    mSupplierHasChanged = true;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    view.performClick();
+                    break;
+                default:
+                    break;
+            }
             return false;
         }
     };

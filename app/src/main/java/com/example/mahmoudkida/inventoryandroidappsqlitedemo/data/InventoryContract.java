@@ -49,10 +49,7 @@ public final class InventoryContract {
         public static final int CATEGORY_MOBILE = 2;
         public static final int CATEGORY_OTHER = 3;
         public static boolean isValidCategory(int category) {
-            if (category == CATEGORY_LAPTOP || category == CATEGORY_TABLET || category == CATEGORY_MOBILE || category == CATEGORY_OTHER) {
-                return true;
-            }
-            return false;
+            return category == CATEGORY_LAPTOP || category == CATEGORY_TABLET || category == CATEGORY_MOBILE || category == CATEGORY_OTHER;
         }
     }
 
