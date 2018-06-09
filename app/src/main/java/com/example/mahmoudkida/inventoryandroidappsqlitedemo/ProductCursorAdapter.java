@@ -39,7 +39,7 @@ public class ProductCursorAdapter extends CursorAdapter {
         int categoryColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_CATEGORY);
         //set views data
         productNameView.setText(cursor.getString(nameColumnIndex));
-        productPriceView.setText(cursor.getInt(priceColumnIndex));
+        productPriceView.setText(Integer.toString(cursor.getInt(priceColumnIndex)));
         productQuantityView.setText(Integer.toString(cursor.getInt(quantityColumnIndex)));
         int productCategory = cursor.getInt(categoryColumnIndex);
         String productCategoryName;

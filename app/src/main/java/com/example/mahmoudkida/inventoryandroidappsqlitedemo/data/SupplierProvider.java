@@ -33,7 +33,7 @@ public class SupplierProvider extends ContentProvider {
         // The content URI of the form "content://com.example.android.pets/pets" will map to the
         // integer code {@link #PETS}. This URI is used to provide access to MULTIPLE rows
         // of the pets table.
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_SUPPLIERS, SUPPLIERS);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY_SUPPLIER, InventoryContract.PATH_SUPPLIERS, SUPPLIERS);
 
         // The content URI of the form "content://com.example.android.pets/pets/#" will map to the
         // integer code {@link #PET_ID}. This URI is used to provide access to ONE single row
@@ -42,7 +42,7 @@ public class SupplierProvider extends ContentProvider {
         // In this case, the "#" wildcard is used where "#" can be substituted for an integer.
         // For example, "content://com.example.android.pets/pets/3" matches, but
         // "content://com.example.android.pets/pets" (without a number at the end) doesn't match.
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.PATH_SUPPLIERS + "/#", SUPPLIER_ID);
+        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY_SUPPLIER, InventoryContract.PATH_SUPPLIERS + "/#", SUPPLIER_ID);
     }
 
     /** Database helper object */

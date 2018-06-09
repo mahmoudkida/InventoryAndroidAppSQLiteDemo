@@ -18,5 +18,13 @@
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".SupplierEditActivity" />
         <activity android:name=".ProductEditActivity"></activity>
+        <provider
+            android:name=".data.ProductProvider"
+            android:authorities="com.example.android.product"
+            android:exported="false" />
+        <provider
+            android:name=".data.SupplierProvider"
+            android:authorities="com.example.android.supplier"
+            android:exported="false" />
     </application>
 </manifest>

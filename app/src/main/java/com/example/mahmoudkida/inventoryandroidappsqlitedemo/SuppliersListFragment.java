@@ -23,7 +23,7 @@ public class SuppliersListFragment extends Fragment implements
     private static final int SUPLLIER_LOADER = 0;
 
     /** Adapter for the ListView */
-    ProductCursorAdapter mCursorAdapter;
+    SupplierCursorAdapter mCursorAdapter;
     public static SuppliersListFragment newInstance() {
         return new SuppliersListFragment();
     }
@@ -37,7 +37,7 @@ public class SuppliersListFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_suppliers_list, container, false);
         ListView suppliersList = view.findViewById(R.id.suppliersList);
 
-        mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
+        mCursorAdapter = new SupplierCursorAdapter(getActivity(), null);
         suppliersList.setAdapter(mCursorAdapter);
         // Setup the item click listener
         suppliersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,9 +74,10 @@ public class SuppliersListFragment extends Fragment implements
                 SupplierEntry.COLUMN_SUPPLIER_NAME,
                 SupplierEntry.COLUMN_SUPPLIER_PHONE };
 
+        Uri uri = SupplierEntry.CONTENT_URI;
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(getActivity(),   // Parent activity context
-                SupplierEntry.CONTENT_URI,   // Provider content URI to query
+                uri,   // Provider content URI to query
                 projection,             // Columns to include in the resulting Cursor
                 null,                   // No selection clause
                 null,                   // No selection arguments
