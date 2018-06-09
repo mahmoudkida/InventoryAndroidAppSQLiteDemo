@@ -60,4 +60,7 @@
     <string name="no_supplier_title">No Supplier Added Yet!</string>
     <string name="no_supplier_subtitle">Please click on the add button below to start adding new suppliers!</string>
     <string name="product_supplier_label">Product Supplier</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="quantity">Quantity</string>
 </resources>

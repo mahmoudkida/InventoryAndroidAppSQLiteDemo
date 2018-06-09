@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="@android:dimen/thumbnail_width"
+        android:layout_height="@android:dimen/thumbnail_height"
+        android:contentDescription="@string/productImageDescription"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_placeholder"
         app:srcCompat="@android:color/holo_blue_light"
-        android:contentDescription="@string/productImageDescription"/>
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="255dp" />
 
     <TextView
         android:id="@+id/productName"
@@ -26,6 +24,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text=""
+        android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/productImage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +60,7 @@
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
 
 </android.support.constraint.ConstraintLayout>
 
