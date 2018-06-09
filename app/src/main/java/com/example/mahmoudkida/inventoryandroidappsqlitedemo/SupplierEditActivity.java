@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,21 +23,27 @@ import android.widget.Toast;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
 
 public class SupplierEditActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<Cursor>{
-    /** Identifier for the pet data loader */
+        LoaderManager.LoaderCallbacks<Cursor> {
+    /**
+     * Identifier for the pet data loader
+     */
     private static final int EXISTING_SUPPLIER_LOADER = 0;
-    /** Content URI for the existing pet (null if it's a new pet) */
+    /**
+     * Content URI for the existing pet (null if it's a new pet)
+     */
     private Uri mCurrentSupplierUri;
-
-    /** EditText field to enter the pet's name */
+    /**
+     * EditText field to enter the pet's name
+     */
     private EditText viewSupplierName;
-
-    /** EditText field to enter the pet's breed */
+    /**
+     * EditText field to enter the pet's breed
+     */
     private EditText viewSupplierPhone;
-
-    /** Boolean flag that keeps track of whether the supplier has been edited (true) or not (false) */
+    /**
+     * Boolean flag that keeps track of whether the supplier has been edited (true) or not (false)
+     */
     private boolean mSupplierHasChanged = false;
-
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mPetHasChanged boolean to true.
@@ -67,34 +73,31 @@ public class SupplierEditActivity extends AppCompatActivity implements
         // in order to figure out if we're creating a new pet or editing an existing one.
         Intent intent = getIntent();
         mCurrentSupplierUri = intent.getData();
-
         // If the intent DOES NOT contain a pet content URI, then we know that we are
         // creating a new pet.
         if (mCurrentSupplierUri == null) {
             // This is a new pet, so change the app bar to say "Add a Pet"
             setTitle(getString(R.string.editor_activity_title_new_Supllier));
-
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a pet that hasn't been created yet.)
             invalidateOptionsMenu();
         } else {
             // Otherwise this is an existing pet, so change app bar to say "Edit Pet"
             setTitle(getString(R.string.edit_supplier));
-
             // Initialize a loader to read the pet data from the database
             // and display the current values in the editor
             getLoaderManager().initLoader(EXISTING_SUPPLIER_LOADER, null, this);
         }
-
         // Find all relevant views that we will need to read user input from
         viewSupplierName = findViewById(R.id.editSupplierName);
-        viewSupplierPhone =  findViewById(R.id.editSupplierPhone);
+        viewSupplierPhone = findViewById(R.id.editSupplierPhone);
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
         viewSupplierName.setOnTouchListener(mTouchListener);
         viewSupplierPhone.setOnTouchListener(mTouchListener);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
@@ -117,7 +120,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
         }
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -143,7 +145,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
                     NavUtils.navigateUpFromSameTask(SupplierEditActivity.this);
                     return true;
                 }
-
                 // Otherwise if there are unsaved changes, setup a dialog to warn the user.
                 // Create a click listener to handle the user confirming that
                 // changes should be discarded.
@@ -155,7 +156,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
                                 NavUtils.navigateUpFromSameTask(SupplierEditActivity.this);
                             }
                         };
-
                 // Show a dialog that notifies the user they have unsaved changes
                 showUnsavedChangesDialog(discardButtonClickListener);
                 return true;
@@ -171,7 +171,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
         // Use trim to eliminate leading or trailing white space
         String supplierName = viewSupplierName.getText().toString().trim();
         String supplierPhone = viewSupplierPhone.getText().toString().trim();
-
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentSupplierUri == null &&
@@ -180,19 +179,16 @@ public class SupplierEditActivity extends AppCompatActivity implements
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
-
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(SupplierEntry.COLUMN_SUPPLIER_NAME, supplierName);
         values.put(SupplierEntry.COLUMN_SUPPLIER_PHONE, supplierPhone);
-
         // Determine if this is a new or existing pet by checking if mCurrentPetUri is null or not
         if (mCurrentSupplierUri == null) {
             // This is a NEW pet, so insert a new pet into the provider,
             // returning the content URI for the new pet.
             Uri newUri = getContentResolver().insert(SupplierEntry.CONTENT_URI, values);
-
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
                 // If the new content URI is null, then there was an error with insertion.
@@ -209,7 +205,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
             // because mCurrentPetUri will already identify the correct row in the database that
             // we want to modify.
             int rowsAffected = getContentResolver().update(mCurrentSupplierUri, values, null, null);
-
             // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
                 // If no rows were affected, then there was an error with the update.
@@ -233,7 +228,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
             super.onBackPressed();
             return;
         }
-
         // Otherwise if there are unsaved changes, setup a dialog to warn the user.
         // Create a click listener to handle the user confirming that changes should be discarded.
         DialogInterface.OnClickListener discardButtonClickListener =
@@ -244,7 +238,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
                         finish();
                     }
                 };
-
         // Show dialog that there are unsaved changes
         showUnsavedChangesDialog(discardButtonClickListener);
     }
@@ -256,8 +249,7 @@ public class SupplierEditActivity extends AppCompatActivity implements
         String[] projection = {
                 SupplierEntry._ID,
                 SupplierEntry.COLUMN_SUPPLIER_NAME,
-                SupplierEntry.COLUMN_SUPPLIER_PHONE };
-
+                SupplierEntry.COLUMN_SUPPLIER_PHONE};
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
                 mCurrentSupplierUri,         // Query the content URI for the current pet
@@ -266,32 +258,28 @@ public class SupplierEditActivity extends AppCompatActivity implements
                 null,                   // No selection arguments
                 null);                  // Default sort order
     }
+
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         // Bail early if the cursor is null or there is less than 1 row in the cursor
         if (cursor == null || cursor.getCount() < 1) {
             return;
         }
-
         // Proceed with moving to the first row of the cursor and reading data from it
         // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
             // Find the columns of pet attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_NAME);
             int phoneColumnIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_PHONE);
-
-
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             String phone = cursor.getString(phoneColumnIndex);
-
-
             // Update the views on the screen with the values from the database
             viewSupplierName.setText(name);
             viewSupplierPhone.setText(phone);
-
         }
     }
+
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         // If the loader is invalidated, clear out all the data from the input fields.
@@ -322,7 +310,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
                 }
             }
         });
-
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -351,7 +338,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
                 }
             }
         });
-
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -367,7 +353,6 @@ public class SupplierEditActivity extends AppCompatActivity implements
             // Pass in null for the selection and selection args because the mCurrentSupplierUri
             // content URI already identifies the pet that we want.
             int rowsDeleted = getContentResolver().delete(mCurrentSupplierUri, null, null);
-
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
@@ -379,10 +364,7 @@ public class SupplierEditActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             }
         }
-
         // Close the activity
         finish();
     }
-
-
 }

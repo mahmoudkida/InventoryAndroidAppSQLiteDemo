@@ -3,39 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SupplierEditActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".SupplierEditActivity">
 
     <TextView
-        android:labelFor="@+id/editSupplierName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/supplier_name_label"
         android:layout_marginTop="10dp"
-        android:padding="10dp"/>
+        android:labelFor="@+id/editSupplierName"
+        android:padding="10dp"
+        android:text="@string/supplier_name_label" />
 
     <EditText
         android:id="@+id/editSupplierName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
         android:hint="@string/supplier_name_label"
-        android:layout_margin="12dp"/>
+        android:inputType="textPersonName"
+        android:text="" />
+
     <TextView
-        android:labelFor="@+id/editSupplierPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/supplier_phone_label"
-        android:padding="10dp"/>
+        android:labelFor="@+id/editSupplierPhone"
+        android:padding="10dp"
+        android:text="@string/supplier_phone_label" />
 
     <EditText
         android:id="@+id/editSupplierPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:ems="10"
-        android:inputType="phone"
         android:hint="@string/supplier_phone_label"
-        android:layout_margin="12dp"/>
+        android:inputType="phone" />
 </LinearLayout>

@@ -16,15 +16,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
 
 public class SuppliersListFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor>{
-    /** Identifier for the product data loader */
+        LoaderManager.LoaderCallbacks<Cursor> {
+    /**
+     * Identifier for the product data loader
+     */
     private static final int SUPLLIER_LOADER = 0;
-
-    /** Adapter for the ListView */
+    /**
+     * Adapter for the ListView
+     */
     SupplierCursorAdapter mCursorAdapter;
+
     public static SuppliersListFragment newInstance() {
         return new SuppliersListFragment();
     }
@@ -34,37 +39,30 @@ public class SuppliersListFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_suppliers_list, container, false);
         ListView suppliersList = view.findViewById(R.id.suppliersList);
-
         mCursorAdapter = new SupplierCursorAdapter(getActivity(), null);
         suppliersList.setAdapter(mCursorAdapter);
         suppliersList.setEmptyView(view.findViewById(R.id.emptyView));
-
         // Setup the item click listener
         suppliersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 // Create new intent to go to {@link EditorActivity}
                 Intent intent = new Intent(getActivity(), SupplierEditActivity.class);
-
                 // Form the content URI that represents the specific product that was clicked on,
                 // by appending the "id" (passed as input to this method) onto the
                 // {@link ProductEntry#CONTENT_URI}.
                 // For example, the URI would be "content://com.example.android.products/products/2"
                 // if the product with ID 2 was clicked on.
                 Uri currentProductUri = ContentUris.withAppendedId(SupplierEntry.CONTENT_URI, id);
-
                 // Set the URI on the data field of the intent
                 intent.setData(currentProductUri);
-
                 // Launch the {@link EditorActivity} to display the data for the current product.
                 startActivity(intent);
             }
         });
         getLoaderManager().initLoader(SUPLLIER_LOADER, null, this);
-
         FloatingActionButton fab = view.findViewById(R.id.addSupplier);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,16 +74,13 @@ public class SuppliersListFragment extends Fragment implements
         return view;
     }
 
-
-
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Define a projection that specifies the columns from the table we care about.
         String[] projection = {
                 SupplierEntry._ID,
                 SupplierEntry.COLUMN_SUPPLIER_NAME,
-                SupplierEntry.COLUMN_SUPPLIER_PHONE };
-
+                SupplierEntry.COLUMN_SUPPLIER_PHONE};
         Uri uri = SupplierEntry.CONTENT_URI;
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(getActivity(),   // Parent activity context

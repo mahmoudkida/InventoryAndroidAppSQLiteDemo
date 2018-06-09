@@ -3,89 +3,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductEditActivity" android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ProductEditActivity">
 
     <TextView
         android:id="@+id/product_name_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/product_name_label"
+        android:labelFor="@+id/productName"
         android:paddingLeft="12dp"
         android:paddingTop="10dp"
-        android:labelFor="@+id/productName"/>
+        android:text="@string/product_name_label" />
 
     <EditText
-        android:layout_margin="12dp"
         android:id="@+id/productName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:ems="10"
+        android:hint="@string/product_name_label"
         android:inputType="textPersonName"
-        android:text=""
-        android:hint="@string/product_name_label"/>
+        android:text="" />
 
     <TextView
-        android:paddingLeft="12dp"
-        android:paddingTop="10dp"
-        android:labelFor="@+id/productPrice"
         android:id="@+id/product_price_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/productPrice"
+        android:paddingLeft="12dp"
+        android:paddingTop="10dp"
         android:text="@string/product_price_label" />
 
     <EditText
-        android:layout_margin="12dp"
-        android:hint="@string/product_price_label"
         android:id="@+id/productPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:ems="10"
+        android:hint="@string/product_price_label"
         android:inputType="number" />
 
     <TextView
-        android:paddingLeft="12dp"
-        android:paddingTop="10dp"
-        android:labelFor="@+id/productQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/productQuantity"
+        android:paddingLeft="12dp"
+        android:paddingTop="10dp"
         android:text="@string/product_quantity_label" />
 
     <EditText
-        android:layout_margin="12dp"
         android:id="@+id/productQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:ems="10"
-        android:inputType="number"
-        android:hint="@string/product_quantity_label"/>
+        android:hint="@string/product_quantity_label"
+        android:inputType="number" />
 
     <TextView
-        android:paddingLeft="12dp"
-        android:paddingTop="10dp"
-        android:labelFor="@+id/productCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/productCategory"
+        android:paddingLeft="12dp"
+        android:paddingTop="10dp"
         android:text="@string/product_category_label" />
 
     <Spinner
-        android:layout_margin="12dp"
         android:id="@+id/productCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_margin="12dp" />
 
     <TextView
-        android:paddingLeft="12dp"
-        android:paddingTop="10dp"
-        android:labelFor="@+id/productSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/productSupplier"
+        android:paddingLeft="12dp"
+        android:paddingTop="10dp"
         android:text="@string/product_supplier_label" />
 
     <Spinner
-        android:layout_margin="12dp"
         android:id="@+id/productSupplier"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp" />
 </LinearLayout>

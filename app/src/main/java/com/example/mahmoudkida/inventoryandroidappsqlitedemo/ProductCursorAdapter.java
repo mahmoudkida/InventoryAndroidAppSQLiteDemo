@@ -33,24 +33,24 @@ public class ProductCursorAdapter extends CursorAdapter {
         TextView productCategoryView = view.findViewById(R.id.productCategory);
         // Figure out the index of each column
         int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME);
-        int priceColumnIndex = cursor.getColumnIndex( ProductEntry.COLUMN_PRODUCT_PRICE);
-        int quantityColumnIndex = cursor.getColumnIndex( ProductEntry.COLUMN_PRODUCT_QUANTITY);
-        int categoryColumnIndex = cursor.getColumnIndex( ProductEntry.COLUMN_PRODUCT_CATEGORY);
+        int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_PRICE);
+        int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_QUANTITY);
+        int categoryColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_CATEGORY);
         //set views data
         productNameView.setText(cursor.getString(nameColumnIndex));
-        productPriceView.setText(context.getString(R.string.price) +  ": " + Integer.toString(cursor.getInt(priceColumnIndex)) + "$");
-        productQuantityView.setText(context.getString(R.string.quantity) +  ": " + Integer.toString(cursor.getInt(quantityColumnIndex)));
+        productPriceView.setText(context.getString(R.string.price) + ": " + Integer.toString(cursor.getInt(priceColumnIndex)) + "$");
+        productQuantityView.setText(context.getString(R.string.quantity) + ": " + Integer.toString(cursor.getInt(quantityColumnIndex)));
         int productCategory = cursor.getInt(categoryColumnIndex);
         String productCategoryName;
         switch (productCategory) {
             case CATEGORY_LAPTOP:
-                productCategoryName = context.getString(R.string.category) +  ": " + context.getString(R.string.laptop);
+                productCategoryName = context.getString(R.string.category) + ": " + context.getString(R.string.laptop);
                 break;
             case CATEGORY_TABLET:
-                productCategoryName = context.getString(R.string.category) +  ": " + context.getString(R.string.tablet);
+                productCategoryName = context.getString(R.string.category) + ": " + context.getString(R.string.tablet);
                 break;
             case CATEGORY_MOBILE:
-                productCategoryName = context.getString(R.string.category) +  ": " + context.getString(R.string.mobile);
+                productCategoryName = context.getString(R.string.category) + ": " + context.getString(R.string.mobile);
                 break;
             default:
                 productCategoryName = context.getString(R.string.unkown_category);

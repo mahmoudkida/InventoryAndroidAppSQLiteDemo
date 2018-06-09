@@ -29,10 +29,6 @@ import android.widget.Toast;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.ProductEntry;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class ProductEditActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
     /**
@@ -118,7 +114,6 @@ public class ProductEditActivity extends AppCompatActivity implements
                 SupplierEntry._ID,
                 SupplierEntry.COLUMN_SUPPLIER_NAME,
                 SupplierEntry.COLUMN_SUPPLIER_PHONE};
-
         // This loader will execute the ContentProvider's query method on a background thread
         Cursor supplierCursor = getContentResolver().query(
                 SupplierEntry.CONTENT_URI         // Query the content URI for the current pet
@@ -136,16 +131,13 @@ public class ProductEditActivity extends AppCompatActivity implements
         }
         // Set the integer mSelected to the constant values
         viewProductSupplier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             public void onItemSelected(AdapterView parent, View view,
                                        int pos, long log) {
-
-                Cursor c = (Cursor)parent.getItemAtPosition(pos);
+                Cursor c = (Cursor) parent.getItemAtPosition(pos);
                 mSupplierId = c.getInt(c.getColumnIndexOrThrow(SupplierEntry._ID));
             }
 
             public void onNothingSelected(AdapterView arg0) {
-
             }
         });
     }
@@ -482,6 +474,4 @@ public class ProductEditActivity extends AppCompatActivity implements
         // Close the activity
         finish();
     }
-
-
 }
