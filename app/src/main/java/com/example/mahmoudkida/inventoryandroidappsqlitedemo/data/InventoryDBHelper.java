@@ -55,7 +55,7 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
         String SQL_CREATE_SUPPLIERS_TABLE = "CREATE TABLE " + SupplierEntry.TABLE_NAME + " ("
                 + SupplierEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + SupplierEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, "
-                + SupplierEntry.COLUMN_SUPPLIER_PHONE + " INTEGER);";
+                + SupplierEntry.COLUMN_SUPPLIER_PHONE + " TEXT);";
         try {
             // Execute the SQL statement
             db.execSQL(SQL_CREATE_SUPPLIERS_TABLE);

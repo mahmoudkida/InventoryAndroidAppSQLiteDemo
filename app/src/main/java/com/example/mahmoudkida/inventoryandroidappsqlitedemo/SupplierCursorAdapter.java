@@ -45,7 +45,7 @@ public class SupplierCursorAdapter extends CursorAdapter {
         //set views data
         supplierIdView.setText("ID: " + Integer.toString(cursor.getInt(idColumnIndex)));
         supplierNameView.setText(cursor.getString(nameColumnIndex));
-        supplierPhoneView.setText(Integer.toString(cursor.getInt(phoneColumnIndex)));
+        supplierPhoneView.setText(cursor.getString(phoneColumnIndex));
 
     }
 
