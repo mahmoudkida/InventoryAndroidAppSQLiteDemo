@@ -10,7 +10,9 @@
         android:labelFor="@+id/editSupplierName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/supplier_name_label" />
+        android:text="@string/supplier_name_label"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"/>
 
     <EditText
         android:id="@+id/editSupplierName"
@@ -19,12 +21,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
-        android:hint="@string/supplier_name_label"/>
+        android:hint="@string/supplier_name_label"
+        android:layout_margin="12dp"/>
     <TextView
         android:labelFor="@+id/editSupplierPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/supplier_phone_label" />
+        android:text="@string/supplier_phone_label"
+        android:padding="10dp"/>
 
     <EditText
         android:id="@+id/editSupplierPhone"
@@ -32,5 +36,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
-        android:hint="@string/supplier_phone_label"/>
+        android:hint="@string/supplier_phone_label"
+        android:layout_margin="12dp"/>
 </LinearLayout>

@@ -260,10 +260,10 @@ private static final int  REQUEST_CODE_ASK_PERMISSIONS = 668;
 
 
             // Update the views on the screen with the values from the database
-            viewSupplierName.setText(name);
-            viewProductPrice.setText(Integer.toString(price));
-            viewProductCategory.setText(categoryName);
-            viewProductQuantity.setText(Integer.toString(qauntity));
+            viewProductName.setText(name);
+            viewProductPrice.setText(getString(R.string.price) + ": " + Integer.toString(price) + "$");
+            viewProductCategory.setText(getString(R.string.category) + ": " + categoryName);
+            viewProductQuantity.setText(getString(R.string.quantity) + ": " + Integer.toString(qauntity));
 
             //getting supplier information
 
@@ -292,8 +292,8 @@ private static final int  REQUEST_CODE_ASK_PERMISSIONS = 668;
 
 
                 // Update the views on the screen with the values from the database
-                viewSupplierName.setText(supplierName);
-                viewSupplierPhone.setText(supplierPhone);
+                viewSupplierName.setText(getString(R.string.supplier_name_label)+ ": " + supplierName);
+                viewSupplierPhone.setText(getString(R.string.supplier_phone_label)+ ": " + supplierPhone);
             }
             supplierCursor.close();
         }
@@ -407,7 +407,17 @@ private static final int  REQUEST_CODE_ASK_PERMISSIONS = 668;
         // Close the activity
         finish();
     }
+    /**
+     * This method is called when the back button is pressed.
+     */
+    @Override
+    public void onBackPressed() {
+        // If the pet hasn't changed, continue with handling back button press
+            super.onBackPressed();
+            finish();
+            return;
 
+    }
 
 
 }

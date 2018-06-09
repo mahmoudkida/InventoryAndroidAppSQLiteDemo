@@ -482,4 +482,6 @@ public class ProductEditActivity extends AppCompatActivity implements
         // Close the activity
         finish();
     }
+
+
 }
