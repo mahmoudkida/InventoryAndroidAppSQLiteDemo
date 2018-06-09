@@ -38,4 +38,14 @@
     <string name="refill_product">Refill Product</string>
     <string name="call_supplier">Call Supplier</string>
     <string name="productDetails">Product Details</string>
+    <string name="editor_activity_title_new_Product">Add New Produt</string>
+    <string name="editor_shipment_failed">Shioment Failed</string>
+    <string name="editor_shipment_successful">Product Shipped Successfully</string>
+    <string name="editor_shipment_refill">Your are out of stock please refill this product</string>
+    <string name="refill_header">Refill Product</string>
+    <string name="refill_message">Enter the amount you want to refill in numbers</string>
+    <string name="editor_refill_failed">Refill Failed</string>
+    <string name="editor_refill_successful">Product Refilled Successfully</string>
+    <string name="editor_refill_enter_positive_number">Enter refill positive number</string>
+    <string name="refill">Refill</string>
 </resources>
