@@ -37,4 +37,5 @@
     <string name="ship">Ship</string>
     <string name="refill_product">Refill Product</string>
     <string name="call_supplier">Call Supplier</string>
+    <string name="productDetails">Product Details</string>
 </resources>
