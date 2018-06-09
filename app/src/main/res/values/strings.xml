@@ -11,4 +11,24 @@
     <string name="tablet">Tablet</string>
     <string name="mobile">Mobile</string>
     <string name="unkown_category">Unknown Category</string>
+    <string name="editor_activity_title_new_Supllier">New Supplier</string>
+    <string name="edit_supplier">Edit Supplier</string>
+    <string name="add_product">Add New Porduct</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="product_list">Product List</string>
+    <string name="supplier_list">Supplier List</string>
+    <string name="editor_insert_supplier_failed">Failed to add supplier</string>
+    <string name="editor_insert_supplier_successful">Supplier Added Successfully</string>
+    <string name="editor_update_supplier_failed">Failed to update supplier</string>
+    <string name="editor_update_supplier_successful">Supplier updated successfully</string>
+    <string name="unsaved_changes_dialog_msg">There is unsaved changes</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="delete_dialog_msg">Are you sure you want to delete this item?</string>
+    <string name="delete">Delete</string>
+    <string name="editor_delete_supplier_failed">Deleting supplier FAILED</string>
+    <string name="editor_delete_supplier_successful">Supplier Deleted Succefully</string>
+    <string name="cancel">Cancel</string>
+    <string name="action_save">Save Item</string>
+    <string name="action_delete">Delete Item</string>
 </resources>

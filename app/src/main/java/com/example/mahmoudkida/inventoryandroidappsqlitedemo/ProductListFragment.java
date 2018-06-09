@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,16 @@ public class ProductListFragment extends Fragment implements
             }
         });
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
+
+        // Setup FAB to open EditorActivity
+        FloatingActionButton fab = view.findViewById(R.id.addProduct);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProductEditActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

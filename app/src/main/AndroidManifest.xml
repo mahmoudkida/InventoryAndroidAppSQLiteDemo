@@ -9,15 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".SupplierEditActivity" />
-        <activity android:name=".ProductEditActivity"></activity>
+        <activity android:name=".ProductDetailsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mahmoudkida.inventoryandroidappsqlitedemo.MainActivity" />
+        </activity>
+        <activity android:name=".SupplierEditActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mahmoudkida.inventoryandroidappsqlitedemo.MainActivity" />
+        </activity>
+        <activity android:name=".ProductEditActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mahmoudkida.inventoryandroidappsqlitedemo.ProductDetailsActivity" />
+        </activity>
         <provider
             android:name=".data.ProductProvider"
             android:authorities="com.example.android.product"

@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment productPragment = (Fragment) ProductListFragment.newInstance();
         fragmentManager.beginTransaction().replace(R.id.content_frame, productPragment).commit();
         navigationView.setCheckedItem(R.id.products_nav);
+        setTitle(getString(R.string.product_list));
+
 
 
         navigationView.setNavigationItemSelectedListener(
@@ -67,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
                         if(menuItem.getItemId() == R.id.products_nav){
+                            setTitle(getString(R.string.product_list));
                             FragmentManager fragmentManager = getFragmentManager();
                             Fragment productPragment = (Fragment) ProductListFragment.newInstance();
                             fragmentManager.beginTransaction().replace(R.id.content_frame, productPragment).commit();
                         }
                         else if(menuItem.getItemId() == R.id.suppliers_nav){
+                            setTitle(getString(R.string.supplier_list));
                             FragmentManager fragmentManager = getFragmentManager();
                             Fragment suppliersListFragment = (Fragment) SuppliersListFragment.newInstance();
                             fragmentManager.beginTransaction().replace(R.id.content_frame, suppliersListFragment).commit();
