@@ -3,13 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context=".ProductListFragment">
     <!-- TODO: Update blank fragment layout -->
 
     <ListView android:id="@+id/productsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <LinearLayout
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical" android:orientation="vertical">
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            tools:ignore="VectorDrawableCompat"
+            ads:srcCompat="@drawable/ic_3d_printer" />
+        <TextView
+            android:text="No Products Added Yet! "
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Please click on the add button below to start adding new products!"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addProduct"

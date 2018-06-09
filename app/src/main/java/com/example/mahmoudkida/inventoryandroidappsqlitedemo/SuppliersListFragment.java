@@ -40,6 +40,8 @@ public class SuppliersListFragment extends Fragment implements
 
         mCursorAdapter = new SupplierCursorAdapter(getActivity(), null);
         suppliersList.setAdapter(mCursorAdapter);
+        suppliersList.setEmptyView(view.findViewById(R.id.emptyView));
+
         // Setup the item click listener
         suppliersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

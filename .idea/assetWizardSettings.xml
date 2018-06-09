@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_edit_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\uxbert" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_delivery_truck" />
+                            <entry key="sourceFile" value="C:\Users\uxbert\Downloads\delivery-truck (3).svg" />
                           </map>
                         </option>
                       </PersistentState>

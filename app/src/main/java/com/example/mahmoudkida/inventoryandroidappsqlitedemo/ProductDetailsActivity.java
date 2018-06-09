@@ -137,12 +137,13 @@ private TextView viewSupplierName;
                     SupplierEntry.COLUMN_SUPPLIER_PHONE };
 
             // This loader will execute the ContentProvider's query method on a background thread
-            CursorLoader supplierCursor = new CursorLoader(this,   // Parent activity context
-                    ContentUris.withAppendedId(SupplierEntry.CONTENT_URI, supplierId),         // Query the content URI for the current pet
-                    supplierProjection,             // Columns to include in the resulting Cursor
-                    null,                   // No selection clause
-                    null,                   // No selection arguments
-                    null);                  // Default sort order
+            Cursor supplierCursor = getContentResolver().query(
+                    ContentUris.withAppendedId(SupplierEntry.CONTENT_URI, supplierId)         // Query the content URI for the current pet
+                    , supplierProjection
+                    , null
+                    , null);
+
+
             if (supplierCursor.moveToFirst()) {
                 // Find the columns of pet attributes that we're interested in
                 int supplierNameColumnIndex = cursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_NAME);

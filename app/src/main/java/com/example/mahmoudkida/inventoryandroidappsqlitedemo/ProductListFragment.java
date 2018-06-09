@@ -42,6 +42,7 @@ public class ProductListFragment extends Fragment implements
 
         mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
         productsList.setAdapter(mCursorAdapter);
+        productsList.setEmptyView(view.findViewById(R.id.emptyView));
         // Setup the item click listener
         productsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
