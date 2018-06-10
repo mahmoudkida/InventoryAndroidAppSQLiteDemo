@@ -71,5 +71,10 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // The database is still at version 1, so there's nothing to do be done here.
+        // Drop older table if existed
+        db.execSQL("DROP TABLE IF EXISTS " + SupplierEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + ProductEntry.TABLE_NAME);
+        // Create tables again
+        onCreate(db);
     }
 }
