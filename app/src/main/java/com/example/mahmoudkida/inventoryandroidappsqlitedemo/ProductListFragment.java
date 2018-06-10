@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.ProductEntry;
@@ -32,6 +33,8 @@ public class ProductListFragment extends Fragment implements
      */
     ProductRecyclerCursorAdapter mCursorAdapter;
 
+    private RecyclerView productsList;
+    private LinearLayout emptyView;
     public static ProductListFragment newInstance() {
         return new ProductListFragment();
     }
@@ -42,35 +45,16 @@ public class ProductListFragment extends Fragment implements
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
-        RecyclerView productsList = view.findViewById(R.id.productsList);
+        productsList = view.findViewById(R.id.productsList);
+        emptyView = view.findViewById(R.id.emptyView);
         mCursorAdapter = new ProductRecyclerCursorAdapter(getActivity(),null);
-        //mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
         LinearLayoutManager mLayout= new LinearLayoutManager(getActivity());
         mLayout.setOrientation(LinearLayoutManager.VERTICAL);
         productsList.setLayoutManager(mLayout);
 
         productsList.setAdapter(mCursorAdapter);
 
-        //TODO:set empty view
-        //productsList.(view.findViewById(R.id.emptyView));
-        // Setup the item click listener
-//        productsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                // Create new intent to go to {@link EditorActivity}
-//                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-//                // Form the content URI that represents the specific product that was clicked on,
-//                // by appending the "id" (passed as input to this method) onto the
-//                // {@link ProductEntry#CONTENT_URI}.
-//                // For example, the URI would be "content://com.example.android.products/products/2"
-//                // if the product with ID 2 was clicked on.
-//                Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
-//                // Set the URI on the data field of the intent
-//                intent.setData(currentProductUri);
-//                // Launch the {@link EditorActivity} to display the data for the current product.
-//                startActivity(intent);
-//            }
-//        });
+
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = view.findViewById(R.id.addProduct);
@@ -105,8 +89,17 @@ public class ProductListFragment extends Fragment implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update {@link ProductCursorAdapter} with this new cursor containing updated product data
-        mCursorAdapter.swapCursor(data);
+        // Update adapter with this new cursor containing updated product data
+        if(data == null && data.getCount() < 1){
+            productsList.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else{
+            mCursorAdapter.swapCursor(data);
+            productsList.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+
     }
 
     @Override

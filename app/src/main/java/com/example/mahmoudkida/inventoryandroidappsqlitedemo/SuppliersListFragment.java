@@ -93,7 +93,7 @@ public class SuppliersListFragment extends Fragment implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update {@link ProductCursorAdapter} with this new cursor containing updated product data
+        // Update adapter with this new cursor containing updated product data
         mCursorAdapter.swapCursor(data);
     }
 
