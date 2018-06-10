@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,7 @@ public class ProductListFragment extends Fragment implements
     /**
      * Adapter for the ListView
      */
-    ProductCursorAdapter mCursorAdapter;
+    ProductRecyclerCursorAdapter mCursorAdapter;
 
     public static ProductListFragment newInstance() {
         return new ProductListFragment();
@@ -40,28 +42,35 @@ public class ProductListFragment extends Fragment implements
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
-        ListView productsList = view.findViewById(R.id.productsList);
-        mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
+        RecyclerView productsList = view.findViewById(R.id.productsList);
+        mCursorAdapter = new ProductRecyclerCursorAdapter(getActivity(),null);
+        //mCursorAdapter = new ProductCursorAdapter(getActivity(), null);
+        LinearLayoutManager mLayout= new LinearLayoutManager(getActivity());
+        mLayout.setOrientation(LinearLayoutManager.VERTICAL);
+        productsList.setLayoutManager(mLayout);
+
         productsList.setAdapter(mCursorAdapter);
-        productsList.setEmptyView(view.findViewById(R.id.emptyView));
+
+        //TODO:set empty view
+        //productsList.(view.findViewById(R.id.emptyView));
         // Setup the item click listener
-        productsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                // Create new intent to go to {@link EditorActivity}
-                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-                // Form the content URI that represents the specific product that was clicked on,
-                // by appending the "id" (passed as input to this method) onto the
-                // {@link ProductEntry#CONTENT_URI}.
-                // For example, the URI would be "content://com.example.android.products/products/2"
-                // if the product with ID 2 was clicked on.
-                Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
-                // Set the URI on the data field of the intent
-                intent.setData(currentProductUri);
-                // Launch the {@link EditorActivity} to display the data for the current product.
-                startActivity(intent);
-            }
-        });
+//        productsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                // Create new intent to go to {@link EditorActivity}
+//                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+//                // Form the content URI that represents the specific product that was clicked on,
+//                // by appending the "id" (passed as input to this method) onto the
+//                // {@link ProductEntry#CONTENT_URI}.
+//                // For example, the URI would be "content://com.example.android.products/products/2"
+//                // if the product with ID 2 was clicked on.
+//                Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
+//                // Set the URI on the data field of the intent
+//                intent.setData(currentProductUri);
+//                // Launch the {@link EditorActivity} to display the data for the current product.
+//                startActivity(intent);
+//            }
+//        });
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = view.findViewById(R.id.addProduct);
