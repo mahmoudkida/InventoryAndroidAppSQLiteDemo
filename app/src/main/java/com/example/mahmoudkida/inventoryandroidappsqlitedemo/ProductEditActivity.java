@@ -204,9 +204,11 @@ public class ProductEditActivity extends AppCompatActivity implements
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 // Save pet to database
-                saveProduct();
+                Boolean closeActivity = saveProduct();
                 // Exit activity
-                finish();
+                if(closeActivity){
+                    finish();
+                }
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
@@ -242,15 +244,14 @@ public class ProductEditActivity extends AppCompatActivity implements
     /**
      * Get user input from editor and save pet into database.
      */
-    private void saveProduct() {
+    private Boolean saveProduct() {
+        Boolean closeActivity = false;
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String productName = viewProductName.getText().toString().trim();
         String productPrice = viewProductPrice.getText().toString().trim();
         String productQuantity = viewProductQuantity.getText().toString().trim();
-        //get integer values of price and quantity
-        int productPriceInt = Integer.parseInt(productPrice);
-        int productQuantityInt = Integer.parseInt(productQuantity);
+
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentProductUri == null &&
@@ -258,7 +259,8 @@ public class ProductEditActivity extends AppCompatActivity implements
                 && TextUtils.isEmpty(productQuantity)) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
-            return;
+            closeActivity = true;
+            return closeActivity;
         }
 
         //prevent submit if one item is empty
@@ -268,14 +270,19 @@ public class ProductEditActivity extends AppCompatActivity implements
             // No need to create ContentValues and no need to do any ContentProvider operations.
             Toast.makeText(this, getString(R.string.editor_fill_all_fields),
                     Toast.LENGTH_LONG).show();
-            return;
+            closeActivity = false;
+            return closeActivity;
         }
 
+        //get integer values of price and quantity
+        int productPriceInt = Integer.parseInt(productPrice);
+        int productQuantityInt = Integer.parseInt(productQuantity);
         //prevent submit of minus values
         if(productPriceInt < 0 || productQuantityInt < 0){
             Toast.makeText(this, getString(R.string.editor_filled_minus_value),
                     Toast.LENGTH_LONG).show();
-            return;
+            closeActivity = false;
+            return closeActivity;
         }
 
         // Create a ContentValues object where column names are the keys,
@@ -296,10 +303,12 @@ public class ProductEditActivity extends AppCompatActivity implements
                 // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_insert_supplier_failed),
                         Toast.LENGTH_SHORT).show();
+                closeActivity = false;
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_insert_supplier_successful),
                         Toast.LENGTH_SHORT).show();
+                closeActivity = true;
             }
         } else {
             // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri
@@ -312,12 +321,15 @@ public class ProductEditActivity extends AppCompatActivity implements
                 // If no rows were affected, then there was an error with the update.
                 Toast.makeText(this, getString(R.string.editor_update_supplier_failed),
                         Toast.LENGTH_SHORT).show();
+                closeActivity = false;
             } else {
                 // Otherwise, the update was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_update_supplier_successful),
                         Toast.LENGTH_SHORT).show();
+                closeActivity = true;
             }
         }
+        return closeActivity;
     }
 
     /**

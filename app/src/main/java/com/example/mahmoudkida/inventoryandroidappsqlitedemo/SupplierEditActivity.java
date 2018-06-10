@@ -128,9 +128,11 @@ public class SupplierEditActivity extends AppCompatActivity implements
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 // Save pet to database
-                saveSupplier();
+                Boolean closeActivity = saveSupplier();
                 // Exit activity
-                finish();
+                if(closeActivity){
+                    finish();
+                }
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
@@ -166,7 +168,8 @@ public class SupplierEditActivity extends AppCompatActivity implements
     /**
      * Get user input from editor and save pet into database.
      */
-    private void saveSupplier() {
+    private Boolean saveSupplier() {
+        Boolean closeActivity = false;
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String supplierName = viewSupplierName.getText().toString().trim();
@@ -177,14 +180,16 @@ public class SupplierEditActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(supplierName) && TextUtils.isEmpty(supplierPhone)) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
-            return;
+            closeActivity = true;
+            return closeActivity;
         }
         if (TextUtils.isEmpty(supplierName) || TextUtils.isEmpty(supplierPhone)) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             Toast.makeText(this, getString(R.string.editor_fill_all_fields),
                     Toast.LENGTH_LONG).show();
-            return;
+            closeActivity = false;
+            return closeActivity;
         }
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
@@ -198,10 +203,12 @@ public class SupplierEditActivity extends AppCompatActivity implements
             Uri newUri = getContentResolver().insert(SupplierEntry.CONTENT_URI, values);
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
+                closeActivity = false;
                 // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_insert_supplier_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
+                closeActivity = true;
                 // Otherwise, the insertion was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_insert_supplier_successful),
                         Toast.LENGTH_SHORT).show();
@@ -214,15 +221,18 @@ public class SupplierEditActivity extends AppCompatActivity implements
             int rowsAffected = getContentResolver().update(mCurrentSupplierUri, values, null, null);
             // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
+                closeActivity = false;
                 // If no rows were affected, then there was an error with the update.
                 Toast.makeText(this, getString(R.string.editor_update_supplier_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
+                closeActivity = true;
                 // Otherwise, the update was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_update_supplier_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }
+        return closeActivity;
     }
 
     /**
