@@ -9,9 +9,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -71,7 +69,6 @@ public class ProductEditActivity extends AppCompatActivity implements
         }
     };
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +105,6 @@ public class ProductEditActivity extends AppCompatActivity implements
         setupSupplierSpinner();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setupSupplierSpinner() {
         String[] supplierProjection = {
                 SupplierEntry._ID,
@@ -119,7 +115,8 @@ public class ProductEditActivity extends AppCompatActivity implements
                 SupplierEntry.CONTENT_URI         // Query the content URI for the current pet
                 , supplierProjection
                 , null
-                , null);
+                , null
+                ,null);
         if (supplierCursor.getCount() > 0) {
             String[] from = new String[]{SupplierEntry.COLUMN_SUPPLIER_NAME};
             // create an array of the display item we want to bind our data to

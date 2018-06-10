@@ -12,17 +12,13 @@
         android:contentDescription="@string/productImageDescription"
         android:scaleType="centerCrop"
         android:src="@drawable/default_placeholder"
-        app:srcCompat="@android:color/holo_blue_light"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="255dp" />
+        app:srcCompat="@android:color/holo_blue_light" />
 
     <TextView
         android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        style="ItemPadding"
         android:text=""
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/productImage"
@@ -32,9 +28,7 @@
         android:id="@+id/productCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        style="ItemPadding"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/productImage"
         app:layout_constraintTop_toBottomOf="@+id/productName" />
@@ -43,8 +37,7 @@
         android:id="@+id/productPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        style="ItemPadding"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/productImage"
         app:layout_constraintTop_toBottomOf="@+id/productCategory" />
@@ -53,10 +46,7 @@
         android:id="@+id/productQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        style="ItemPadding"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

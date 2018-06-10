@@ -8,25 +8,19 @@
         android:id="@+id/supplierId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp" />
+        style="SupplierItemPadding" />
 
     <TextView
         android:id="@+id/supplierName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:textSize="20sp" />
+        style="SupplierItemPadding"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/supplierPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp" />
+        style="SupplierItemPadding"
+        android:textSize="18sp" />
 </LinearLayout>

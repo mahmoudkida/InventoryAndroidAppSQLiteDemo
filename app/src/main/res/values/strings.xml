@@ -41,7 +41,7 @@
     <string name="editor_activity_title_new_Product">Add New Product</string>
     <string name="editor_shipment_failed">Shipment Failed</string>
     <string name="editor_shipment_successful">Product Shipped Successfully</string>
-    <string name="editor_shipment_refill">Your are out of stock please refill this product</string>
+    <string name="editor_shipment_refill">Your are out of stock, please refill this product</string>
     <string name="refill_header">Refill Product</string>
     <string name="refill_message">Enter the amount you want to refill in numbers</string>
     <string name="editor_refill_failed">Refill Failed</string>
