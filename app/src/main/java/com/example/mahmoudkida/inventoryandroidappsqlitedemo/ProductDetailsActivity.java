@@ -19,6 +19,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -156,7 +158,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements
 
         if (currentItemCursor.moveToFirst()) {
             int productQuantity = currentItemCursor.getInt(0);
-            if (productQuantity > 0) {
+            if (productQuantity >= 0) {
                 if(method.equals("increase")) {
                     productQuantity = productQuantity + amount;
                 }
@@ -279,16 +281,18 @@ public class ProductDetailsActivity extends AppCompatActivity implements
                     , null
                     , null,
                     null);
-            if (supplierCursor.moveToFirst()) {
-                // Find the columns of pet attributes that we're interested in
-                int supplierNameColumnIndex = supplierCursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_NAME);
-                int supplierPhoneColumnIndex = supplierCursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_PHONE);
-                // Extract out the value from the Cursor for the given column index
-                String supplierName = supplierCursor.getString(supplierNameColumnIndex);
-                String supplierPhone = supplierCursor.getString(supplierPhoneColumnIndex);
-                // Update the views on the screen with the values from the database
-                viewSupplierName.setText(getString(R.string.supplier_name_label) + ": " + supplierName);
-                viewSupplierPhone.setText(getString(R.string.supplier_phone_label) + ": " + supplierPhone);
+            if(supplierCursor != null && cursor.getCount() == 1){
+                if (supplierCursor.moveToFirst()) {
+                    // Find the columns of pet attributes that we're interested in
+                    int supplierNameColumnIndex = supplierCursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_NAME);
+                    int supplierPhoneColumnIndex = supplierCursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_PHONE);
+                    // Extract out the value from the Cursor for the given column index
+                    String supplierName = supplierCursor.getString(supplierNameColumnIndex);
+                    String supplierPhone = supplierCursor.getString(supplierPhoneColumnIndex);
+                    // Update the views on the screen with the values from the database
+                    viewSupplierName.setText(getString(R.string.supplier_name_label) + ": " + supplierName);
+                    viewSupplierPhone.setText(getString(R.string.supplier_phone_label) + ": " + supplierPhone);
+                }
             }
             supplierCursor.close();
         }
@@ -340,6 +344,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -398,13 +403,27 @@ public class ProductDetailsActivity extends AppCompatActivity implements
         finish();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
+                && keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     /**
      * This method is called when the back button is pressed.
      */
     @Override
     public void onBackPressed() {
         // If the pet hasn't changed, continue with handling back button press
-        super.onBackPressed();
+        Intent myIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(myIntent);
         finish();
         return;
     }
