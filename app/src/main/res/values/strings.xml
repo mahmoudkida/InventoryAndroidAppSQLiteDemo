@@ -63,4 +63,6 @@
     <string name="price">Price</string>
     <string name="category">Category</string>
     <string name="quantity">Quantity</string>
+    <string name="editor_fill_all_fields">Please fill all fields before submitting</string>
+    <string name="editor_filled_minus_value">You can not insert minus values</string>
 </resources>

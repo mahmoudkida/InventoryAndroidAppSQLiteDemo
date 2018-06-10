@@ -179,6 +179,13 @@ public class SupplierEditActivity extends AppCompatActivity implements
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
+        if (TextUtils.isEmpty(supplierName) || TextUtils.isEmpty(supplierPhone)) {
+            // Since no fields were modified, we can return early without creating a new pet.
+            // No need to create ContentValues and no need to do any ContentProvider operations.
+            Toast.makeText(this, getString(R.string.editor_fill_all_fields),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();

@@ -42,7 +42,7 @@ public class ProductEditActivity extends AppCompatActivity implements
     private Spinner viewProductCategory;
     private EditText viewProductQuantity;
     private Spinner viewProductSupplier;
-    private int mCategory = ProductEntry.CATEGORY_OTHER;
+    private int mCategory = -1;
     private int mSupplierId = -1;
     /**
      * Boolean flag that keeps track of whether the supplier has been edited (true) or not (false)
@@ -255,11 +255,29 @@ public class ProductEditActivity extends AppCompatActivity implements
         // and check if all the fields in the editor are blank
         if (mCurrentProductUri == null &&
                 TextUtils.isEmpty(productName) && TextUtils.isEmpty(productPrice)
-                && TextUtils.isEmpty(productQuantity) && mCategory == ProductEntry.CATEGORY_OTHER) {
+                && TextUtils.isEmpty(productQuantity)) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
+
+        //prevent submit if one item is empty
+        if (TextUtils.isEmpty(productName) || TextUtils.isEmpty(productPrice)
+                || TextUtils.isEmpty(productQuantity) || mCategory == -1 || mSupplierId == -1) {
+            // Since no fields were modified, we can return early without creating a new pet.
+            // No need to create ContentValues and no need to do any ContentProvider operations.
+            Toast.makeText(this, getString(R.string.editor_fill_all_fields),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //prevent submit of minus values
+        if(productPriceInt < 0 || productQuantityInt < 0){
+            Toast.makeText(this, getString(R.string.editor_filled_minus_value),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();
