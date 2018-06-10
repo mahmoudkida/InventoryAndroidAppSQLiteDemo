@@ -6,21 +6,21 @@
 
     <TextView
         android:id="@+id/supplierId"
+        style="SupplierItemPadding"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="SupplierItemPadding" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/supplierName"
+        style="SupplierItemPadding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="SupplierItemPadding"
         android:textSize="22sp" />
 
     <TextView
         android:id="@+id/supplierPhone"
+        style="SupplierItemPadding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="SupplierItemPadding"
         android:textSize="18sp" />
 </LinearLayout>
