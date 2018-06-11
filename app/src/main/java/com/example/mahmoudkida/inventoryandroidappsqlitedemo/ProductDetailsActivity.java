@@ -47,6 +47,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements
     private TextView viewProductQuantity;
     private TextView viewSupplierPhone;
     private TextView viewSupplierName;
+    private String supplierPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +133,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements
                     ActivityCompat.requestPermissions(ProductDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE},
                             REQUEST_CODE_ASK_PERMISSIONS);
                 } else {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + viewSupplierPhone.getText()));
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + supplierPhoneNumber));
                     startActivity(intent);
                 }
             }
@@ -276,10 +277,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements
                     int supplierPhoneColumnIndex = supplierCursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_PHONE);
                     // Extract out the value from the Cursor for the given column index
                     String supplierName = supplierCursor.getString(supplierNameColumnIndex);
-                    String supplierPhone = supplierCursor.getString(supplierPhoneColumnIndex);
+                    supplierPhoneNumber = supplierCursor.getString(supplierPhoneColumnIndex);
                     // Update the views on the screen with the values from the database
                     viewSupplierName.setText(getString(R.string.supplier_name_label) + ": " + supplierName);
-                    viewSupplierPhone.setText(getString(R.string.supplier_phone_label) + ": " + supplierPhone);
+                    viewSupplierPhone.setText(getString(R.string.supplier_phone_label) + ": " + supplierPhoneNumber);
                 }
             }
             supplierCursor.close();
