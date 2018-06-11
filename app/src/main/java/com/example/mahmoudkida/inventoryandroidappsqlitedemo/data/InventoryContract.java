@@ -10,10 +10,11 @@ import android.provider.BaseColumns;
 public final class InventoryContract {
     public static final String CONTENT_AUTHORITY_PRODUCT = "com.example.android.product";
     public static final String CONTENT_AUTHORITY_SUPPLIER = "com.example.android.supplier";
-    public static final Uri BASE_CONTENT_URI_PRODUCT = Uri.parse("content://" + CONTENT_AUTHORITY_PRODUCT);
-    public static final Uri BASE_CONTENT_URI_SUPPLIER = Uri.parse("content://" + CONTENT_AUTHORITY_SUPPLIER);
+    private static final Uri BASE_CONTENT_URI_PRODUCT = Uri.parse("content://" + CONTENT_AUTHORITY_PRODUCT);
+    private static final Uri BASE_CONTENT_URI_SUPPLIER = Uri.parse("content://" + CONTENT_AUTHORITY_SUPPLIER);
     public static final String PATH_PRODUCTS = "products";
     public static final String PATH_SUPPLIERS = "suppliers";
+
     private InventoryContract() {
     }
 

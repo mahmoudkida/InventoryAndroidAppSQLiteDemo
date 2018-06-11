@@ -14,7 +14,7 @@ import android.util.Log;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.SupplierEntry;
 
 public class SupplierProvider extends ContentProvider {
-    public static final String LOG_TAG = SupplierProvider.class.getSimpleName();
+    private static final String LOG_TAG = SupplierProvider.class.getSimpleName();
     /**
      * URI matcher code for the content URI for the pets table
      */
@@ -99,7 +99,7 @@ public class SupplierProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
+    public Uri insert(Uri uri, ContentValues contentValues) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case SUPPLIERS:

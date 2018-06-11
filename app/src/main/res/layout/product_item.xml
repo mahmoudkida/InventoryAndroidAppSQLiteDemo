@@ -65,7 +65,7 @@
             android:layout_marginBottom="8dp"
             android:background="#0000"
             android:padding="2dp"
-            android:text="Sale"
+            android:text="@string/sale"
             android:textColor="#AB47BC"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/productImage" />
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:background="#0000"
-            android:text="View Details"
+            android:text="@string/view_details"
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/sale" />

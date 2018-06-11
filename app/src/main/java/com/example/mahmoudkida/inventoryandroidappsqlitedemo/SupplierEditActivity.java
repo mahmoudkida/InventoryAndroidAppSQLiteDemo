@@ -130,7 +130,7 @@ public class SupplierEditActivity extends AppCompatActivity implements
                 // Save pet to database
                 Boolean closeActivity = saveSupplier();
                 // Exit activity
-                if(closeActivity){
+                if (closeActivity) {
                     finish();
                 }
                 return true;
@@ -169,7 +169,7 @@ public class SupplierEditActivity extends AppCompatActivity implements
      * Get user input from editor and save pet into database.
      */
     private Boolean saveSupplier() {
-        Boolean closeActivity = false;
+        Boolean closeActivity;
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String supplierName = viewSupplierName.getText().toString().trim();

@@ -28,7 +28,7 @@ public class SuppliersListFragment extends Fragment implements
     /**
      * Adapter for the ListView
      */
-    SupplierCursorAdapter mCursorAdapter;
+    private SupplierCursorAdapter mCursorAdapter;
 
     public static SuppliersListFragment newInstance() {
         return new SuppliersListFragment();

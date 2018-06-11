@@ -116,7 +116,7 @@ public class ProductEditActivity extends AppCompatActivity implements
                 , supplierProjection
                 , null
                 , null
-                ,null);
+                , null);
         if (supplierCursor.getCount() > 0) {
             String[] from = new String[]{SupplierEntry.COLUMN_SUPPLIER_NAME};
             // create an array of the display item we want to bind our data to
@@ -206,7 +206,7 @@ public class ProductEditActivity extends AppCompatActivity implements
                 // Save pet to database
                 Boolean closeActivity = saveProduct();
                 // Exit activity
-                if(closeActivity){
+                if (closeActivity) {
                     finish();
                 }
                 return true;
@@ -245,13 +245,12 @@ public class ProductEditActivity extends AppCompatActivity implements
      * Get user input from editor and save pet into database.
      */
     private Boolean saveProduct() {
-        Boolean closeActivity = false;
+        Boolean closeActivity;
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String productName = viewProductName.getText().toString().trim();
         String productPrice = viewProductPrice.getText().toString().trim();
         String productQuantity = viewProductQuantity.getText().toString().trim();
-
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentProductUri == null &&
@@ -262,7 +261,6 @@ public class ProductEditActivity extends AppCompatActivity implements
             closeActivity = true;
             return closeActivity;
         }
-
         //prevent submit if one item is empty
         if (TextUtils.isEmpty(productName) || TextUtils.isEmpty(productPrice)
                 || TextUtils.isEmpty(productQuantity) || mCategory == -1 || mSupplierId == -1) {
@@ -273,18 +271,16 @@ public class ProductEditActivity extends AppCompatActivity implements
             closeActivity = false;
             return closeActivity;
         }
-
         //get integer values of price and quantity
         int productPriceInt = Integer.parseInt(productPrice);
         int productQuantityInt = Integer.parseInt(productQuantity);
         //prevent submit of minus values
-        if(productPriceInt < 0 || productQuantityInt < 0){
+        if (productPriceInt < 0 || productQuantityInt < 0) {
             Toast.makeText(this, getString(R.string.editor_filled_minus_value),
                     Toast.LENGTH_LONG).show();
             closeActivity = false;
             return closeActivity;
         }
-
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();

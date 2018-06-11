@@ -15,6 +15,7 @@
  *
  */
 package com.example.mahmoudkida.inventoryandroidappsqlitedemo;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
@@ -23,18 +24,12 @@ import android.support.v7.widget.RecyclerView;
 /**
  * Created by skyfishjy on 10/31/14.
  */
-
 abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
-
-    private Context mContext;
-
+    private final Context mContext;
     private Cursor mCursor;
-
     private boolean mDataValid;
-
     private int mRowIdColumn;
-
-    private DataSetObserver mDataSetObserver;
+    private final DataSetObserver mDataSetObserver;
 
     public CursorRecyclerViewAdapter(Context context, Cursor cursor) {
         mContext = context;
@@ -45,10 +40,6 @@ abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHolder> ext
         if (mCursor != null) {
             mCursor.registerDataSetObserver(mDataSetObserver);
         }
-    }
-
-    public Cursor getCursor() {
-        return mCursor;
     }
 
     @Override
@@ -86,20 +77,7 @@ abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHolder> ext
     }
 
     /**
-     * Change the underlying cursor to a new cursor. If there is an existing cursor it will be
-     * closed.
-     */
-    public void changeCursor(Cursor cursor) {
-        Cursor old = swapCursor(cursor);
-        if (old != null) {
-            old.close();
-        }
-    }
-
-    /**
-     * Swap in a new Cursor, returning the old Cursor.  Unlike
-     * {@link #changeCursor(Cursor)}, the returned old Cursor is <em>not</em>
-     * closed.
+     * Swap in a new Cursor, returning the old Cursor.
      */
     public Cursor swapCursor(Cursor newCursor) {
         if (newCursor == mCursor) {

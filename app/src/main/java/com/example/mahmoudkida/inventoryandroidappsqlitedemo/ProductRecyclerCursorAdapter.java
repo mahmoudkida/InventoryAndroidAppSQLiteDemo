@@ -20,38 +20,18 @@ import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContr
  * Created by skyfishjy on 10/31/14.
  */
 public class ProductRecyclerCursorAdapter extends CursorRecyclerViewAdapter<ProductRecyclerCursorAdapter.ViewHolder> {
-    private Context mContext;
+    private final Context mContext;
 
     public ProductRecyclerCursorAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         mContext = context;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView productNameView;
-        public TextView productPriceView;
-        public TextView productQuantityView;
-        public TextView productCategoryView;
-        public Button saleButton;
-        public Button vewDetailsButton;
-
-        public ViewHolder(View view) {
-            super(view);
-            productNameView = view.findViewById(R.id.productName);
-            productPriceView = view.findViewById(R.id.productPrice);
-            productQuantityView = view.findViewById(R.id.productQuantity);
-            productCategoryView = view.findViewById(R.id.productCategory);
-            saleButton = view.findViewById(R.id.sale);
-            vewDetailsButton = view.findViewById(R.id.viewDetails);
-        }
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.product_item, parent, false);
-        ViewHolder vh = new ViewHolder(itemView);
-        return vh;
+        return  new ViewHolder(itemView);
     }
 
     @Override
@@ -101,7 +81,6 @@ public class ProductRecyclerCursorAdapter extends CursorRecyclerViewAdapter<Prod
                         //means the value became in minus
                         Toast.makeText(mContext, mContext.getString(R.string.editor_shipment_refill),
                                 Toast.LENGTH_SHORT).show();
-                        rowsChanged = -1;
                         return;
                     }
                     ContentValues values = new ContentValues();
@@ -117,6 +96,7 @@ public class ProductRecyclerCursorAdapter extends CursorRecyclerViewAdapter<Prod
                     Toast.makeText(mContext, mContext.getString(R.string.editor_shipment_successful),
                             Toast.LENGTH_SHORT).show();
                 }
+                currentItemCursor.close();
             }
         });
         viewHolder.vewDetailsButton.setOnClickListener(new View.OnClickListener() {
@@ -135,5 +115,24 @@ public class ProductRecyclerCursorAdapter extends CursorRecyclerViewAdapter<Prod
                 mContext.startActivity(intent);
             }
         });
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final TextView productNameView;
+        public final TextView productPriceView;
+        public final TextView productQuantityView;
+        public final TextView productCategoryView;
+        public final Button saleButton;
+        public final Button vewDetailsButton;
+
+        public ViewHolder(View view) {
+            super(view);
+            productNameView = view.findViewById(R.id.productName);
+            productPriceView = view.findViewById(R.id.productPrice);
+            productQuantityView = view.findViewById(R.id.productQuantity);
+            productCategoryView = view.findViewById(R.id.productCategory);
+            saleButton = view.findViewById(R.id.sale);
+            vewDetailsButton = view.findViewById(R.id.viewDetails);
+        }
     }
 }

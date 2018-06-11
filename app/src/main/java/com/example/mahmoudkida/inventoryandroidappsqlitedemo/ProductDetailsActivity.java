@@ -12,14 +12,12 @@ import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,20 +69,19 @@ public class ProductDetailsActivity extends AppCompatActivity implements
         viewProductQuantity = findViewById(R.id.productQuantity);
         viewSupplierPhone = findViewById(R.id.productSupplierPhone);
         viewSupplierName = findViewById(R.id.productSupplierName);
-
         //ship to buyers click handling
         View.OnClickListener decreaseProductQauntityListner = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Show a toast message depending on whether or not the delete was successful.
-                changeProductAmount(1, "decrease",getString(R.string.editor_shipment_successful),getString(R.string.editor_shipment_failed),getString(R.string.editor_shipment_refill));
+                changeProductAmount(1, "decrease", getString(R.string.editor_shipment_successful), getString(R.string.editor_shipment_failed), getString(R.string.editor_shipment_refill));
             }
         };
         View.OnClickListener increaseProductQauntityListner = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Show a toast message depending on whether or not the delete was successful.
-                changeProductAmount(1, "increase",getString(R.string.editor_shipment_successful),getString(R.string.editor_shipment_failed),getString(R.string.editor_shipment_refill));
+                changeProductAmount(1, "increase", getString(R.string.editor_shipment_successful), getString(R.string.editor_shipment_failed), getString(R.string.editor_shipment_refill));
             }
         };
         //add click lisnter to decrease and ship product button
@@ -92,79 +89,71 @@ public class ProductDetailsActivity extends AppCompatActivity implements
         ShipButton.setOnClickListener(decreaseProductQauntityListner);
         Button decreaseQuantity = findViewById(R.id.decreaseQuantity);
         decreaseQuantity.setOnClickListener(decreaseProductQauntityListner);
-
         //add click lisnter to increase product
         Button increaseQuantity = findViewById(R.id.increaseQuantity);
         increaseQuantity.setOnClickListener(increaseProductQauntityListner);
-
-    //refill product handling
-    Button refillProduct = findViewById(R.id.refillProduct);
-        refillProduct.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View view){
-        AlertDialog.Builder alert = new AlertDialog.Builder(ProductDetailsActivity.this);
-        alert.setTitle(R.string.refill_header);
-        alert.setMessage(R.string.refill_message);
-        // Set an EditText view to get user input
-        final EditText input = new EditText(ProductDetailsActivity.this);
-        input.setId(R.id.productQuantity);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL); //for decimal numbers
-        alert.setView(input);
-        alert.setPositiveButton(R.string.refill, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                EditText input = ((AlertDialog) dialog).findViewById(R.id.productQuantity);
-                int refillAmount = Integer.parseInt(input.getText().toString());
-                changeProductAmount(refillAmount, "increase", getString(R.string.editor_shipment_successful), getString(R.string.editor_shipment_failed), getString(R.string.editor_shipment_refill));
+        //refill product handling
+        Button refillProduct = findViewById(R.id.refillProduct);
+        refillProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(ProductDetailsActivity.this);
+                alert.setTitle(R.string.refill_header);
+                alert.setMessage(R.string.refill_message);
+                // Set an EditText view to get user input
+                final EditText input = new EditText(ProductDetailsActivity.this);
+                input.setId(R.id.productQuantity);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL); //for decimal numbers
+                alert.setView(input);
+                alert.setPositiveButton(R.string.refill, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        EditText input = ((AlertDialog) dialog).findViewById(R.id.productQuantity);
+                        int refillAmount = Integer.parseInt(input.getText().toString());
+                        changeProductAmount(refillAmount, "increase", getString(R.string.editor_shipment_successful), getString(R.string.editor_shipment_failed), getString(R.string.editor_shipment_refill));
+                    }
+                });
+                alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                        EditText input = ((AlertDialog) dialog).findViewById(R.id.productQuantity);
+                        input.setText("");
+                    }
+                });
+                alert.show();
             }
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
-                EditText input = ((AlertDialog) dialog).findViewById(R.id.productQuantity);
-                input.setText("");
+        //call button code
+        Button callButton = findViewById(R.id.callSupplier);
+        callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(ProductDetailsActivity.this,
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ProductDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE},
+                            REQUEST_CODE_ASK_PERMISSIONS);
+                } else {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + viewSupplierPhone.getText()));
+                    startActivity(intent);
+                }
             }
         });
-        alert.show();
     }
-    });
-    //call button code
-    Button callButton = findViewById(R.id.callSupplier);
-        callButton.setOnClickListener(new View.OnClickListener()
 
-    {
-        @Override
-        public void onClick (View view){
-        if (ContextCompat.checkSelfPermission(ProductDetailsActivity.this,
-                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(ProductDetailsActivity.this,new String[]{Manifest.permission.CALL_PHONE},
-                    REQUEST_CODE_ASK_PERMISSIONS);
-        } else {
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + viewSupplierPhone.getText()));
-            startActivity(intent);
-        }
-    }
-    });
-}
-
-//generic method to change the product quantity
-    private int changeProductAmount(int amount, String method,String successMessage,String failedMessage, String refillMessage) {
+    //generic method to change the product quantity
+    private int changeProductAmount(int amount, String method, String successMessage, String failedMessage, String refillMessage) {
         int rowsChanged = 0;
         String[] projection = {
                 ProductEntry.COLUMN_PRODUCT_QUANTITY
         };
         Cursor currentItemCursor = getContentResolver().query(mCurrentProductUri, projection, null, null, null);
-
         if (currentItemCursor.moveToFirst()) {
             int productQuantity = currentItemCursor.getInt(0);
             if (productQuantity >= 0) {
-                if(method.equals("increase")) {
+                if (method.equals("increase")) {
                     productQuantity = productQuantity + amount;
-                }
-                else if(method.equals("decrease")) {
+                } else if (method.equals("decrease")) {
                     productQuantity = productQuantity - amount;
-                    if(productQuantity < 0) {
+                    if (productQuantity < 0) {
                         //means the value became in minus
                         Toast.makeText(ProductDetailsActivity.this, refillMessage,
                                 Toast.LENGTH_SHORT).show();
@@ -175,19 +164,18 @@ public class ProductDetailsActivity extends AppCompatActivity implements
                 ContentValues values = new ContentValues();
                 values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, productQuantity);
                 rowsChanged = getContentResolver().update(mCurrentProductUri, values, null, null);
-
             }
         }
         if (rowsChanged == 0) {
             // If no rows were deleted, then there was an error with the delete.
-            Toast.makeText(ProductDetailsActivity.this,failedMessage,
+            Toast.makeText(ProductDetailsActivity.this, failedMessage,
                     Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             // Otherwise, the delete was successful and we can display a toast.
             Toast.makeText(ProductDetailsActivity.this, successMessage,
                     Toast.LENGTH_SHORT).show();
         }
+        currentItemCursor.close();
         return rowsChanged;
     }
 
@@ -248,7 +236,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements
             int price = cursor.getInt(priceColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             int category = cursor.getInt(categoryColumnIndex);
-            String categoryName = "";
+            String categoryName;
             switch (category) {
                 case ProductEntry.CATEGORY_LAPTOP:
                     categoryName = getString(R.string.laptop);
@@ -281,7 +269,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements
                     , null
                     , null,
                     null);
-            if(supplierCursor != null && cursor.getCount() == 1){
+            if (supplierCursor != null && cursor.getCount() == 1) {
                 if (supplierCursor.moveToFirst()) {
                     // Find the columns of pet attributes that we're interested in
                     int supplierNameColumnIndex = supplierCursor.getColumnIndex(SupplierEntry.COLUMN_SUPPLIER_NAME);
@@ -404,7 +392,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
                 && keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {
@@ -421,10 +409,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements
     public void onBackPressed() {
         // If the pet hasn't changed, continue with handling back button press
         Intent myIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
-
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(myIntent);
         finish();
-        return;
     }
 }

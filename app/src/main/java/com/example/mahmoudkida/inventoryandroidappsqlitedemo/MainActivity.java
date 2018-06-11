@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryDBHelper;
 
 public class MainActivity extends AppCompatActivity {
-    private InventoryDBHelper inventoryDbHelper;
+
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
 
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        inventoryDbHelper = new InventoryDBHelper(this);
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);

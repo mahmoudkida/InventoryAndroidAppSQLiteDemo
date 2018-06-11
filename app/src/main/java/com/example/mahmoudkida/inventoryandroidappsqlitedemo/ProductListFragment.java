@@ -2,12 +2,10 @@ package com.example.mahmoudkida.inventoryandroidappsqlitedemo;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,9 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.example.mahmoudkida.inventoryandroidappsqlitedemo.data.InventoryContract.ProductEntry;
 
@@ -31,10 +27,10 @@ public class ProductListFragment extends Fragment implements
     /**
      * Adapter for the ListView
      */
-    ProductRecyclerCursorAdapter mCursorAdapter;
-
+    private ProductRecyclerCursorAdapter mCursorAdapter;
     private RecyclerView productsList;
     private LinearLayout emptyView;
+
     public static ProductListFragment newInstance() {
         return new ProductListFragment();
     }
@@ -47,14 +43,11 @@ public class ProductListFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
         productsList = view.findViewById(R.id.productsList);
         emptyView = view.findViewById(R.id.emptyView);
-        mCursorAdapter = new ProductRecyclerCursorAdapter(getActivity(),null);
-        LinearLayoutManager mLayout= new LinearLayoutManager(getActivity());
+        mCursorAdapter = new ProductRecyclerCursorAdapter(getActivity(), null);
+        LinearLayoutManager mLayout = new LinearLayoutManager(getActivity());
         mLayout.setOrientation(LinearLayoutManager.VERTICAL);
         productsList.setLayoutManager(mLayout);
-
         productsList.setAdapter(mCursorAdapter);
-
-
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = view.findViewById(R.id.addProduct);
@@ -90,16 +83,14 @@ public class ProductListFragment extends Fragment implements
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Update adapter with this new cursor containing updated product data
-        if(data == null && data.getCount() < 1){
+        if (data == null && data.getCount() < 1) {
             productsList.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             mCursorAdapter.swapCursor(data);
             productsList.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }
-
     }
 
     @Override
